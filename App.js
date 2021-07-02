@@ -1,13 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import {useFonts} from 'expo-font';
+import AppLoading from 'expo-app-loading';
+import BreadNavigator from './navigation/BreadNavigator';
+
 
 export default function App() {
+
+  const [dataLoaded] = useFonts({
+    'open-sans-regular': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+  })
+
+  if(!dataLoaded){
+    return <AppLoading />
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <BreadNavigator />
+      </View>
+    </SafeAreaView>
   );
 }
 
